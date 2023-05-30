@@ -9,6 +9,41 @@ const cart = {
   totalPrice: 0, // общая стоимость товаров
   count: 0, //количество товаров
   discount: 0,
+
+  set setDiscount(val) {
+    if (val.toUpperCase() === "METHED") this.discount = 15;
+    if (val.toUpperCase() === "NEWYEAR") this.discount = 21;
+  },
+
+  get totalPrice() {
+    return cart.calculateItemPrice();
+  },
+
+  set SetTotalPrice(val) {
+    this.totalPrice = val;
+  },
+
+  get print() {
+    console.log(`текущая корзина :`)
+    this.items.forEach((item) => {
+      console.log(`${item[0]}  общая стоимость ${item[1]} количество ${item[2]}`)
+    });
+    console.log(`общая стоимость корзины ${this.totalPrice} уе`)
+    console.log(`>>>>>>>>>>>>>>>>>>>>>>>`)
+  },
+
+  set increaseCount(addValue) {
+    this.count += addValue;
+  },
+
+  // set add([nameProduct, priceProduct, quantity = 1]) {
+  //   const arrayGood = [nameProduct, priceProduct, quantity];
+  //   this.items[cart.items.length] = arrayGood;
+  //   this.increaseCount = quantity;
+  // },
+
+
+
 }
 
 Object.defineProperty(cart, `discount`, {
@@ -16,22 +51,6 @@ Object.defineProperty(cart, `discount`, {
   enumerable: false, // запрет на отображение
   // writable: false, // запрет на изменение
 })
-
-Object.defineProperty(cart, 'setDiscount', {
-  set(val) {
-    if (val === "METHED") this.discount = 15;
-    if (val === "NEWYEAR") this.discount = 21;
-  }
-});
-
-Object.defineProperty(cart, 'totalPrice', {
-  get() {
-    return cart.calculateItemPrice()
-  },
-  // set(val) {
-  //   return cart.totalPrice = val;
-  // }
-});
 
 Object.defineProperty(cart, `item`, {
   // configurable: true, //запрет на удаление
@@ -51,21 +70,11 @@ Object.defineProperty(cart, `count`, {
   // writable: false, // запрет на изменение
 })
 
-cart.increaseCount = function (add) {
-  this.setCount = add;
-  // cart.count = 999;
-};
-
-Object.defineProperty(cart, `setCount`, {
-  set(val) {
-    this.count += val;
-  }
-})
 
 cart.add = function (nameProduct, priceProduct, quantity = 1) {
   const arrayGood = [nameProduct, priceProduct, quantity];
   this.items[cart.items.length] = arrayGood;
-  this.increaseCount(quantity);
+  this.increaseCount = quantity;
 };
 
 cart.calculateItemPrice = function () {
@@ -76,23 +85,16 @@ cart.calculateItemPrice = function () {
 };
 
 cart.clear = function () {
-  cart.items = [];
-  cart.totalPrice = 0;
-  cart.count = 0;
-};
-
-cart.print = function () {
-  console.log(`текущая корзина :`)
-  this.items.forEach((item) => {
-    console.log(`${item[0]}  общая стоимость ${item[1]} количество ${item[2]}`)
-  });
-  console.log(`общая стоимость корзины ${this.totalPrice} уе`)
-  console.log(`>>>>>>>>>>>>>>>>>>>>>>>`)
+  this.items = [];
+  this.setTotalPrice = 0;
+  this.count = 0;
 };
 
 
 // вызываем добавление товара
-cart.setDiscount = "METHED";
+// cart.setDiscount = "METHED";
+cart.setDiscount = "Methed";
+
 cart.add("good", 100, 20);
 cart.add("good2", 1, 200);
 cart.add("good3", 450);
@@ -101,7 +103,7 @@ cart.add("good5", 450, 88);
 // cart.setDiscount = "NEWYEAR";
 
 
-cart.print();
+cart.print;
 
 console.log("тест ---- задание 11 урока модуль 4");
 console.log(cart)
@@ -111,7 +113,7 @@ console.log(cart)
 // cart.totalPrice = 10;
 
 // print();
-
-// cart.clear();
-cart.print();
+console.log("чистка корзины");
+cart.clear();
+cart.print;
 
