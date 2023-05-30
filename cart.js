@@ -26,8 +26,11 @@ Object.defineProperty(cart, 'setDiscount', {
 
 Object.defineProperty(cart, 'totalPrice', {
   get() {
-    return calculateItemPrice()
-  }
+    return cart.calculateItemPrice()
+  },
+  // set(val) {
+  //   return cart.totalPrice = val;
+  // }
 });
 
 Object.defineProperty(cart, `item`, {
@@ -48,8 +51,8 @@ Object.defineProperty(cart, `count`, {
   // writable: false, // запрет на изменение
 })
 
-const increaseCount = (add) => {
-  cart.setCount = add;
+cart.increaseCount = function (add) {
+  this.setCount = add;
   // cart.count = 999;
 };
 
@@ -59,47 +62,48 @@ Object.defineProperty(cart, `setCount`, {
   }
 })
 
-const add = (nameProduct, priceProduct, quantity = 1) => {
+cart.add = function (nameProduct, priceProduct, quantity = 1) {
   const arrayGood = [nameProduct, priceProduct, quantity];
-  cart.items[cart.items.length] = arrayGood;
-  increaseCount(quantity);
+  this.items[cart.items.length] = arrayGood;
+  this.increaseCount(quantity);
 };
 
-const calculateItemPrice = () => {
-  const newTotal = cart.items.reduce((acc, item) => {
+cart.calculateItemPrice = function () {
+  const newTotal = this.items.reduce((acc, item) => {
     return item[1] + acc;
   }, 0)
   return (newTotal - newTotal * cart.discount / 100);
 };
 
-const clear = () => {
+cart.clear = function () {
   cart.items = [];
   cart.totalPrice = 0;
   cart.count = 0;
 };
 
-const print = () => {
+cart.print = function () {
   console.log(`текущая корзина :`)
-  cart.items.forEach((item) => {
+  this.items.forEach((item) => {
     console.log(`${item[0]}  общая стоимость ${item[1]} количество ${item[2]}`)
   });
-  console.log(`общая стоимость корзины ${cart.totalPrice} уе`)
+  console.log(`общая стоимость корзины ${this.totalPrice} уе`)
+  console.log(`>>>>>>>>>>>>>>>>>>>>>>>`)
 };
 
 
 // вызываем добавление товара
 cart.setDiscount = "METHED";
-add("good", 100, 20);
-add("good2", 1, 200);
-add("good3", 450);
-add("good4", 45, 888);
-add("good5", 450, 88);
+cart.add("good", 100, 20);
+cart.add("good2", 1, 200);
+cart.add("good3", 450);
+cart.add("good4", 45, 888);
+cart.add("good5", 450, 88);
 // cart.setDiscount = "NEWYEAR";
 
 
-print();
+cart.print();
 
-console.log("задание 11 урока модуль 4");
+console.log("тест ---- задание 11 урока модуль 4");
 console.log(cart)
 // cart.count = 55;
 // console.log(cart.count);
@@ -108,6 +112,6 @@ console.log(cart)
 
 // print();
 
-// clear();
-// print();
+// cart.clear();
+cart.print();
 
