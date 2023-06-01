@@ -8,112 +8,135 @@ const cart = {
   items: [], //товары
   totalPrice: 0, // общая стоимость товаров
   count: 0, //количество товаров
-  discount: 0,
+  discount: 9,
 
-  set setDiscount(val) {
+  setDiscount: function (val) {
+    this.discount = 0;
     if (val.toUpperCase() === "METHED") this.discount = 15;
     if (val.toUpperCase() === "NEWYEAR") this.discount = 21;
   },
 
-  get totalPrice() {
+  getTotalPrice: function () {
     return cart.calculateItemPrice();
   },
 
-  set SetTotalPrice(val) {
+  setTotalPrice: function (val) {
     this.totalPrice = val;
   },
 
-  get print() {
+  printCart: function () {
     console.log(`текущая корзина :`)
     this.items.forEach((item) => {
       console.log(`${item[0]}  общая стоимость ${item[1]} количество ${item[2]}`)
     });
-    console.log(`общая стоимость корзины ${this.totalPrice} уе`)
+    console.log(`общая стоимость корзины ${this.getTotalPrice()} уе`)
     console.log(`>>>>>>>>>>>>>>>>>>>>>>>`)
   },
 
-  set increaseCount(addValue) {
-    this.count += addValue;
-  },
-
-  // set add([nameProduct, priceProduct, quantity = 1]) {
-  //   const arrayGood = [nameProduct, priceProduct, quantity];
-  //   this.items[cart.items.length] = arrayGood;
-  //   this.increaseCount = quantity;
+  // increaseCount: function (addValue) {
+  //   this.count += addValue;
   // },
 
+  addToCart: function (nameProduct, priceProduct, quantity = 1) {
+    // const arrayGood = [nameProduct, priceProduct, quantity];
+    this.items[cart.items.length] = [nameProduct, priceProduct, quantity];
+    // this.increaseCount = quantity;
+    this.count += quantity;
+  },
 
+  calculateItemPrice: function () {
+    const newTotal = this.items.reduce((acc, item) => {
+      return item[1] + acc;
+    }, 0);
+    cart.setTotalPrice(newTotal - newTotal * cart.discount / 100);
+    return (newTotal - newTotal * cart.discount / 100);
+  },
+
+  setCount: function (val) {
+    this.count = val;
+  },
+
+  clear: function () {
+    this.items = [];
+    this.setTotalPrice(0);
+    this.setCount(0);
+
+    // this.count = 0;
+    // this.totalPrice = 0;
+  },
 
 }
 
-Object.defineProperty(cart, `discount`, {
-  // configurable: true, //запрет на удаление
+Object.defineProperty(cart, 'discount', {
+  configurable: false, //запрет на удаление
   enumerable: false, // запрет на отображение
   // writable: false, // запрет на изменение
-})
+});
 
 Object.defineProperty(cart, `item`, {
-  // configurable: true, //запрет на удаление
+  configurable: false, //запрет на удаление
   enumerable: false, // запрет на отображение
   writable: false, // запрет на изменение
 });
 
-Object.defineProperty(cart, `toralPrice`, {
-  // configurable: true, //запрет на удаление
+Object.defineProperty(cart, `totalPrice`, {
+  configurable: false, //запрет на удаление
   enumerable: false, // запрет на отображение
-  writable: false, // запрет на изменение
+  // writable: false, // запрет на изменение
 });
 
 Object.defineProperty(cart, `count`, {
-  // configurable: true, //запрет на удаление
+  configurable: false, //запрет на удаление
   enumerable: false, // запрет на отображение
   // writable: false, // запрет на изменение
 })
 
 
-cart.add = function (nameProduct, priceProduct, quantity = 1) {
-  const arrayGood = [nameProduct, priceProduct, quantity];
-  this.items[cart.items.length] = arrayGood;
-  this.increaseCount = quantity;
-};
+// cart.add = function (nameProduct, priceProduct, quantity = 1) {
+//   const arrayGood = [nameProduct, priceProduct, quantity];
+//   this.items[cart.items.length] = arrayGood;
+//   this.increaseCount = quantity;
+// };
 
-cart.calculateItemPrice = function () {
-  const newTotal = this.items.reduce((acc, item) => {
-    return item[1] + acc;
-  }, 0)
-  return (newTotal - newTotal * cart.discount / 100);
-};
+// cart.calculateItemPrice = function () {
+//   const newTotal = this.items.reduce((acc, item) => {
+//     return item[1] + acc;
+//   }, 0)
+//   return (newTotal - newTotal * cart.discount / 100);
+// };
 
-cart.clear = function () {
-  this.items = [];
-  this.setTotalPrice = 0;
-  this.count = 0;
-};
+// cart.clear = function () {
+//   this.items = [];
+//   this.setTotalPrice = 0;
+//   this.count = 0;
+// };
 
 
 // вызываем добавление товара
 // cart.setDiscount = "METHED";
-cart.setDiscount = "Methed";
 
-cart.add("good", 100, 20);
-cart.add("good2", 1, 200);
-cart.add("good3", 450);
-cart.add("good4", 45, 888);
-cart.add("good5", 450, 88);
+cart.setDiscount("Methed");
+
+cart.addToCart("good", 100, 20);
+cart.addToCart("good2", 1, 200);
+cart.addToCart("good3", 450);
+cart.addToCart("good4", 45, 888);
+cart.addToCart("good5", 450, 88);
 // cart.setDiscount = "NEWYEAR";
 
-
-cart.print;
+cart.printCart();
 
 console.log("тест ---- задание 11 урока модуль 4");
-console.log(cart)
+console.log(cart);
 // cart.count = 55;
 // console.log(cart.count);
 
 // cart.totalPrice = 10;
 
 // print();
-console.log("чистка корзины");
-cart.clear();
-cart.print;
 
+console.log(">>>>>>>>>   чистка корзины");
+cart.clear();
+cart.setDiscount("NEAR");
+cart.printCart();
+console.log(cart);
