@@ -10,3 +10,4 @@ function foo(numIncome = []) {
 }
 const arr = foo([])
 console.log(arr);
+
