@@ -1,10 +1,12 @@
 'use strict';
 
 const rectangle = {
-  // width: 2,
-  // height: 2,
+  width: 5,
+  height: 5,
 
-  set setWidth(val = 5) {
+  // setDiscount: function (val) {
+
+  setWidth: function (val) {
     if (Number.isFinite(+val)) {
       this.width = +val;
     } else {
@@ -12,7 +14,7 @@ const rectangle = {
     }
   },
 
-  set setHight(val = 5) {
+  setHeight: function (val) {
     if (Number.isFinite(+val)) {
       this.height = +val;
     } else {
@@ -20,20 +22,20 @@ const rectangle = {
     }
   },
 
-  get square() {
+  square: function () {
     return `${this.width * this.height}см.кв.`;
   },
 
-  get perimeter() {
+  perimeter: function () {
     return `${(this.width + this.height) * 2}см`;
   },
 
 };
 
 
-rectangle.setWidth = "10";
-rectangle.setHight = "15";
-console.log(rectangle.square);
-console.log(rectangle.perimeter);
+rectangle.setWidth("10");
+rectangle.setHeight("15");
+console.log(rectangle.square());
+console.log(rectangle.perimeter());
 console.log("текущее значение ширины и высоты ", rectangle)
 
