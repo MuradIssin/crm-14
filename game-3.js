@@ -24,8 +24,8 @@ let tryAnswer;
 // console.log(tryAnswer);
 
 let direction = '';
-
-function guessNumberRecursia() {
+// guessNumberRecursion
+function guessNumberRecursion() {
   tryAnswer = prompt(`${direction} угадай число от ${inputMin} до ${inputMax}, количество попыток ${maxTry}`);
 
   if (tryAnswer === null) {
@@ -70,9 +70,11 @@ function guessNumberRecursia() {
       direction += ` и это, ты это число ${tryAnswer} уже вводил, `;
     }
   }
-  guessNumberRecursia();
+  guessNumberRecursion();
 }
 
 
 
-guessNumberRecursia();
+guessNumberRecursion();
+
+
