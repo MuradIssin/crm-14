@@ -24,63 +24,89 @@
     // console.log(lang[0]);
 
     return function start() {
-      console.warn(`lets PLAY`);
-      // let
 
-      // const computerBit = Math.round(Math.random() * 2);
-      const computerBit = getRandomIntclusive(0, 2);
-
-      console.log(`ставка компьютера: `, FIGURES_RUS[computerBit], computerBit + 1);
-
-      const playerBitText = prompt("1-Камень, 2-Ножницы, 3-Бумага");
-      if (playerBitText === null) {
-        console.log("игра отменена");
-        alert(`Вы отменили игру`);
-        return;
+      const finishGame = () => {
+        alert(` Результат: \n   Компьютер ${result.computer}  \n   Игрок ${result.player} `);
       }
 
-      const playerBit = +playerBitText - 1;
-      console.log(`ставка игрока:`, FIGURES_RUS[playerBit], playerBit + 1);
-
+      const findBit = (playerBitText) => {
+        // console.log(playerBitText);
+        if (+playerBitText === 1) return 0;
+        if (+playerBitText === 2) return 1;
+        if (+playerBitText === 3) return 2;
+        if (playerBitText !== '') {
+          if (lang[0][0].toUpperCase() === playerBitText[0].toUpperCase()) return 0;
+          if (lang[1][0].toUpperCase() === playerBitText[0].toUpperCase()) return 1;
+          if (lang[2][0].toUpperCase() === playerBitText[0].toUpperCase()) return 2;
+        }
+        return -1;
+      }
 
       const whoWin = (computerBit, playerBit) => {
-        if (computerBit === playerBit) return `ничья`;
-        if ((computerBit === 0) && (playerBit === 1)) return computerWin();//камень и ножницы 1
-        if ((computerBit === 0) && (playerBit === 2)) return playerWin();//камень и бумага -1
-        if ((computerBit === 1) && (playerBit === 0)) return playerWin();//ножницы и камень -1
-        if ((computerBit === 1) && (playerBit === 2)) return computerWin();//ножницы и бумага  1 
-        if ((computerBit === 2) && (playerBit === 0)) return computerWin();//бумага и камень 1 
-        if ((computerBit === 2) && (playerBit === 1)) return playerWin();//бумага и ножницы -1
+        switch (true) {
+          case computerBit === playerBit: return `ничья`;
+          case (computerBit === 0) && (playerBit === 1): return computerWin();//камень и ножницы 1
+          case (computerBit === 1) && (playerBit === 0): return playerWin();//ножницы и камень -1
+          case (computerBit === 1) && (playerBit === 2): return computerWin();//ножницы и бумага  1 
+          case (computerBit === 2) && (playerBit === 0): return computerWin();//бумага и камень 1 
+          case (computerBit === 2) && (playerBit === 1): return playerWin();//бумага и ножницы -1
+          default: return `нет данных`
+        }
+        // if (computerBit === playerBit) return `ничья`;
+        // if ((computerBit === 0) && (playerBit === 1)) return computerWin();//камень и ножницы 1
+        // if ((computerBit === 0) && (playerBit === 2)) return playerWin();//камень и бумага -1
+        // if ((computerBit === 1) && (playerBit === 0)) return playerWin();//ножницы и камень -1
+        // if ((computerBit === 1) && (playerBit === 2)) return computerWin();//ножницы и бумага  1 
+        // if ((computerBit === 2) && (playerBit === 0)) return computerWin();//бумага и камень 1 
+        // if ((computerBit === 2) && (playerBit === 1)) return playerWin();//бумага и ножницы -1
       }
 
       const computerWin = () => {
         result.computer += 1;
         console.log(`текущий счет `, result.computer, result.player);
-        return `compWin`;
+        return `Компьютер Выйграл`;
       }
 
       const playerWin = () => {
         result.player += 1;
         console.log(`текущий счет `, result.computer, result.player);
-        return `playerWin`;
+        return `Вы Выйграли`;
       }
 
-      console.log(`содержит текст: `, lang.includes(playerBitText))
+      console.warn(`lets PLAY`);
+      const computerBit = getRandomIntclusive(0, 3);
+      console.log(`ставка компьютера: `, lang[computerBit]);
 
+      const playerBitText = prompt("1-Камень, 2-Ножницы, 3-Бумага?");
 
+      if (playerBitText === null) {
+        console.log("игра отменена");
+        finishGame();
+        // alert(`Результат: \n   Компьютер ${result.computer}  \n   Игрок ${result.player} `);
+        return;
+      }
 
-      lang.forEach((value, index) => {
-        console.log(value.indexOf(playerBitText));
-        if (value.indexOf(playerBitText) >= 0) return index;
-      });
+      if (playerBitText === '') {
+        start();
+      }
 
+      const playerBit = findBit(playerBitText);
+      // console.log(playerBit);
+      console.log(`ставка игрока:`, lang[playerBit]);
 
+      const winner = whoWin(computerBit, playerBit);
+      console.log(lang[computerBit], lang[playerBit], winner);
 
-      console.log(lang[computerBit], lang[playerBit], whoWin(computerBit, playerBit));
+      if (playerBit >= 0) alert(` Компьютер: ${lang[computerBit]} \n Вы:  ${lang[playerBit]} \n  ${winner}`);
 
+      if (confirm(`eщё?`)) {
+        start();
+      } else {
+        // alert(` Результат: \n   Компьютер ${result.computer}  \n   Игрок ${result.player} `);
+        finishGame();
+        // return
+      }
 
-      // запускаем еще раз игру
-      start();
     }
   }
 
