@@ -1,5 +1,8 @@
-`use strict`;
+'use strict';
 
-const startGame = window.RPS(`EN`);
-startGame();
+const startMarbleGame = window.marble();
+startMarbleGame;
 
+
+// const startGame = window.RPS(`EN`);
+// startGame();
