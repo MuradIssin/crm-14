@@ -14,7 +14,7 @@
     again: `again?`,
     you: `You`,
     draw: `draw`,
-  }
+  };
 
   const MESSAGE_RUS = {
     result: `Результат`,
@@ -26,20 +26,17 @@
     again: `eщё?`,
     you: `Вы`,
     draw: `ничья`,
-  }
+  };
 
   // const MESSAGE_RUS = ['rock', 'scissors', 'paper'];
 
-  const getRandomIntclusive = (min, max) => {
-    return Math.floor(Math.random() * (max - min) + min);
-  }
+  const getRandomIntclusive = (min, max) => Math.floor(Math.random() * (max - min) + min);
 
   // const getFifure = lang => {
 
   // };
 
   const game = (language) => {
-
     const result = {
       player: 0,
       computer: 0,
@@ -54,10 +51,9 @@
     console.log(language, lang, message);
 
     return function start() {
-
       const finishGame = () => {
         alert(` ${message.result}: \n   ${message.computer} ${result.computer}  \n   ${message.player} ${result.player} `);
-      }
+      };
 
       const findBit = (playerBitText) => {
         // console.log(playerBitText);
@@ -70,38 +66,38 @@
           if (lang[2][0].toUpperCase() === playerBitText[0].toUpperCase()) return 2;
         }
         return -1;
-      }
+      };
 
       const computerWin = () => {
         result.computer += 1;
         console.log(`текущий счет `, result.computer, result.player);
         return message.computerWin;
-      }
+      };
 
       const playerWin = () => {
         result.player += 1;
         console.log(`текущий счет `, result.computer, result.player);
         return message.youWin;
-      }
+      };
 
       const whoWin = (computerBit, playerBit) => {
         switch (true) {
           case computerBit === playerBit: return message.draw;
-          case (computerBit === 0) && (playerBit === 1): return computerWin();//камень и ножницы 1
-          case (computerBit === 1) && (playerBit === 0): return playerWin();//ножницы и камень -1
-          case (computerBit === 1) && (playerBit === 2): return computerWin();//ножницы и бумага  1 
-          case (computerBit === 2) && (playerBit === 0): return computerWin();//бумага и камень 1 
-          case (computerBit === 2) && (playerBit === 1): return playerWin();//бумага и ножницы -1
-          default: return `нет данных`
+          case (computerBit === 0) && (playerBit === 1): return computerWin();// камень и ножницы 1
+          case (computerBit === 1) && (playerBit === 0): return playerWin();// ножницы и камень -1
+          case (computerBit === 1) && (playerBit === 2): return computerWin();// ножницы и бумага  1
+          case (computerBit === 2) && (playerBit === 0): return computerWin();// бумага и камень 1
+          case (computerBit === 2) && (playerBit === 1): return playerWin();// бумага и ножницы -1
+          default: return `нет данных`;
         }
         // if (computerBit === playerBit) return `ничья`;
         // if ((computerBit === 0) && (playerBit === 1)) return computerWin();//камень и ножницы 1
         // if ((computerBit === 0) && (playerBit === 2)) return playerWin();//камень и бумага -1
         // if ((computerBit === 1) && (playerBit === 0)) return playerWin();//ножницы и камень -1
-        // if ((computerBit === 1) && (playerBit === 2)) return computerWin();//ножницы и бумага  1 
-        // if ((computerBit === 2) && (playerBit === 0)) return computerWin();//бумага и камень 1 
+        // if ((computerBit === 1) && (playerBit === 2)) return computerWin();//ножницы и бумага  1
+        // if ((computerBit === 2) && (playerBit === 0)) return computerWin();//бумага и камень 1
         // if ((computerBit === 2) && (playerBit === 1)) return playerWin();//бумага и ножницы -1
-      }
+      };
 
       console.warn(`lets PLAY`);
       const computerBit = getRandomIntclusive(0, 3);
@@ -110,7 +106,7 @@
       const playerBitText = prompt(`1-${lang[0]}, 2-${lang[1]}, 3-${lang[2]}?`);
 
       if (playerBitText === null) {
-        console.log("игра отменена?");
+        console.log('игра отменена?');
         if (confirm(message.finishGameQuestion)) {
           finishGame();
         } else {
@@ -140,8 +136,8 @@
         finishGame();
         // return
       }
-    }
-  }
+    };
+  };
 
   window.RPS = game;
-})()
+})();
