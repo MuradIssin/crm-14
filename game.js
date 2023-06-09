@@ -4,6 +4,32 @@
   const FIGURES_ENG = ['rock', 'scissors', 'paper'];
   const FIGURES_RUS = ['камень', 'ножницы', 'бумага'];
 
+  const MESSAGE_ENG = {
+    result: `Result`,
+    computer: `Computer`,
+    player: `Player`,
+    computerWin: `Computer Win`,
+    youWin: `You WIN`,
+    finishGameQuestion: `are you really want to out game?`,
+    again: `again?`,
+    you: `You`,
+    draw: `draw`,
+  }
+
+  const MESSAGE_RUS = {
+    result: `Результат`,
+    computer: `Компьютер`,
+    player: `Игрок`,
+    computerWin: `Компьютер Выйграл`,
+    youWin: `Вы Выйграли`,
+    finishGameQuestion: `точно ты хочешь выйти?`,
+    again: `eщё?`,
+    you: `Вы`,
+    draw: `ничья`,
+  }
+
+  // const MESSAGE_RUS = ['rock', 'scissors', 'paper'];
+
   const getRandomIntclusive = (min, max) => {
     return Math.floor(Math.random() * (max - min) + min);
   }
@@ -21,12 +47,16 @@
 
     // language = `EN`; //выбор языка общения
     const lang = language === `EN` || language === `ENG` ? FIGURES_ENG : FIGURES_RUS;
-    // console.log(lang[0]);
+
+    const message = language === `EN` || language === `ENG` ? MESSAGE_ENG : MESSAGE_RUS;
+
+
+    console.log(language, lang, message);
 
     return function start() {
 
       const finishGame = () => {
-        alert(` Результат: \n   Компьютер ${result.computer}  \n   Игрок ${result.player} `);
+        alert(` ${message.result}: \n   ${message.computer} ${result.computer}  \n   ${message.player} ${result.player} `);
       }
 
       const findBit = (playerBitText) => {
@@ -44,7 +74,7 @@
 
       const whoWin = (computerBit, playerBit) => {
         switch (true) {
-          case computerBit === playerBit: return `ничья`;
+          case computerBit === playerBit: return message.draw;
           case (computerBit === 0) && (playerBit === 1): return computerWin();//камень и ножницы 1
           case (computerBit === 1) && (playerBit === 0): return playerWin();//ножницы и камень -1
           case (computerBit === 1) && (playerBit === 2): return computerWin();//ножницы и бумага  1 
@@ -64,24 +94,28 @@
       const computerWin = () => {
         result.computer += 1;
         console.log(`текущий счет `, result.computer, result.player);
-        return `Компьютер Выйграл`;
+        return message.computerWin;
       }
 
       const playerWin = () => {
         result.player += 1;
         console.log(`текущий счет `, result.computer, result.player);
-        return `Вы Выйграли`;
+        return message.youWin;
       }
 
       console.warn(`lets PLAY`);
       const computerBit = getRandomIntclusive(0, 3);
       console.log(`ставка компьютера: `, lang[computerBit]);
 
-      const playerBitText = prompt("1-Камень, 2-Ножницы, 3-Бумага?");
+      const playerBitText = prompt(`1-${lang[0]}, 2-${lang[1]}, 3-${lang[2]}?`);
 
       if (playerBitText === null) {
-        console.log("игра отменена");
-        finishGame();
+        console.log("игра отменена?");
+        if (confirm(message.finishGameQuestion)) {
+          finishGame();
+        } else {
+          game();
+        }
         // alert(`Результат: \n   Компьютер ${result.computer}  \n   Игрок ${result.player} `);
         return;
       }
@@ -97,16 +131,15 @@
       const winner = whoWin(computerBit, playerBit);
       console.log(lang[computerBit], lang[playerBit], winner);
 
-      if (playerBit >= 0) alert(` Компьютер: ${lang[computerBit]} \n Вы:  ${lang[playerBit]} \n  ${winner}`);
+      if (playerBit >= 0) alert(` ${message.computer}: ${lang[computerBit]} \n ${message.you}:  ${lang[playerBit]} \n  ${winner}`);
 
-      if (confirm(`eщё?`)) {
+      if (confirm(message.again)) {
         start();
       } else {
         // alert(` Результат: \n   Компьютер ${result.computer}  \n   Игрок ${result.player} `);
         finishGame();
         // return
       }
-
     }
   }
 
