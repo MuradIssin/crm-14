@@ -30,10 +30,10 @@
 
   // const MESSAGE_RUS = ['rock', 'scissors', 'paper'];
 
-  const getRandomIntclusive = (min, max) => Math.floor(Math.random() * (max - min) + min);
+  const getRandomIntclusive = (min, max) =>
+    Math.floor(Math.random() * (max - min) + min);
 
   // const getFifure = lang => {
-
   // };
 
   const game = (language) => {
@@ -43,16 +43,19 @@
     };
 
     // language = `EN`; //выбор языка общения
-    const lang = language === `EN` || language === `ENG` ? FIGURES_ENG : FIGURES_RUS;
+    const lang = language === `EN` || language === `ENG` ?
+      FIGURES_ENG : FIGURES_RUS;
 
-    const message = language === `EN` || language === `ENG` ? MESSAGE_ENG : MESSAGE_RUS;
-
+    const message = language === `EN` || language === `ENG` ?
+      MESSAGE_ENG : MESSAGE_RUS;
 
     console.log(language, lang, message);
 
     return function start() {
       const finishGame = () => {
-        alert(` ${message.result}: \n   ${message.computer} ${result.computer}  \n   ${message.player} ${result.player} `);
+        alert(` ${message.result}: 
+          ${message.computer} ${result.computer} 
+          ${message.player} ${result.player} `);
       };
 
       const findBit = (playerBitText) => {
@@ -61,9 +64,15 @@
         if (+playerBitText === 2) return 1;
         if (+playerBitText === 3) return 2;
         if (playerBitText !== '') {
-          if (lang[0][0].toUpperCase() === playerBitText[0].toUpperCase()) return 0;
-          if (lang[1][0].toUpperCase() === playerBitText[0].toUpperCase()) return 1;
-          if (lang[2][0].toUpperCase() === playerBitText[0].toUpperCase()) return 2;
+          if (lang[0][0].toUpperCase() === playerBitText[0].toUpperCase()) {
+            return 0;
+          }
+          if (lang[1][0].toUpperCase() === playerBitText[0].toUpperCase()) {
+            return 1;
+          }
+          if (lang[2][0].toUpperCase() === playerBitText[0].toUpperCase()) {
+            return 2;
+          }
         }
         return -1;
       };
@@ -83,20 +92,18 @@
       const whoWin = (computerBit, playerBit) => {
         switch (true) {
           case computerBit === playerBit: return message.draw;
-          case (computerBit === 0) && (playerBit === 1): return computerWin();// камень и ножницы 1
-          case (computerBit === 1) && (playerBit === 0): return playerWin();// ножницы и камень -1
-          case (computerBit === 1) && (playerBit === 2): return computerWin();// ножницы и бумага  1
-          case (computerBit === 2) && (playerBit === 0): return computerWin();// бумага и камень 1
-          case (computerBit === 2) && (playerBit === 1): return playerWin();// бумага и ножницы -1
+          case (computerBit === 0) && (playerBit === 1): return computerWin();
+          // камень и ножницы 1
+          case (computerBit === 1) && (playerBit === 0): return playerWin();
+          // ножницы и камень -1
+          case (computerBit === 1) && (playerBit === 2): return computerWin();
+          // ножницы и бумага  1
+          case (computerBit === 2) && (playerBit === 0): return computerWin();
+          // бумага и камень 1
+          case (computerBit === 2) && (playerBit === 1): return playerWin();
+          // бумага и ножницы -1
           default: return `нет данных`;
         }
-        // if (computerBit === playerBit) return `ничья`;
-        // if ((computerBit === 0) && (playerBit === 1)) return computerWin();//камень и ножницы 1
-        // if ((computerBit === 0) && (playerBit === 2)) return playerWin();//камень и бумага -1
-        // if ((computerBit === 1) && (playerBit === 0)) return playerWin();//ножницы и камень -1
-        // if ((computerBit === 1) && (playerBit === 2)) return computerWin();//ножницы и бумага  1
-        // if ((computerBit === 2) && (playerBit === 0)) return computerWin();//бумага и камень 1
-        // if ((computerBit === 2) && (playerBit === 1)) return playerWin();//бумага и ножницы -1
       };
 
       console.warn(`lets PLAY`);
@@ -112,7 +119,6 @@
         } else {
           game();
         }
-        // alert(`Результат: \n   Компьютер ${result.computer}  \n   Игрок ${result.player} `);
         return;
       }
 
@@ -127,14 +133,15 @@
       const winner = whoWin(computerBit, playerBit);
       console.log(lang[computerBit], lang[playerBit], winner);
 
-      if (playerBit >= 0) alert(` ${message.computer}: ${lang[computerBit]} \n ${message.you}:  ${lang[playerBit]} \n  ${winner}`);
+      if (playerBit >= 0) {
+        alert(` ${message.computer}: ${lang[computerBit]} 
+         ${message.you}:  ${lang[playerBit]} \n  ${winner}`);
+      }
 
       if (confirm(message.again)) {
         start();
       } else {
-        // alert(` Результат: \n   Компьютер ${result.computer}  \n   Игрок ${result.player} `);
         finishGame();
-        // return
       }
     };
   };
