@@ -161,6 +161,9 @@
   const gameMarble = (language) => {
 
 
+    const currentCount = (text) => {
+      console.log(`текущий счет, ${text} `, marbleCount.player, marbleCount.bot);
+    }
 
     console.log(`текущий счет`, marbleCount.player, marbleCount.bot);
 
@@ -171,14 +174,39 @@
     const inputBitPlayer = (maxMarble, message = ``) => {
       const bit = +prompt(`${message}введите количество шариков для игры от 1 до ${maxMarble}`);
       if ((bit > 0) && (bit <= maxMarble)) return bit;
-      inputBitPlayer(maxMarble, `введите корректное число\n`);
+      return inputBitPlayer(maxMarble, `введите корректное число\n`);
     };
 
-    const x = inputBitPlayer(marbleCount.player);
-    console.log(x);
+    const botGuess = () => {
+      return Math.round(Math.random() * 1);
+    };
+
+    const roundResult = () => {
+      const bit = inputBitPlayer(marbleCount.player)
+      if (bit % 2 === botGuess()) {
+        console.log(`Копьютер угадал`);
+        marbleCount.player -= bit;
+        marbleCount.bot += bit;
+      } else {
+        console.log(`Копьютер НЕ угадал`);
+        marbleCount.player += bit;
+        marbleCount.bot -= bit;
+      }
+      currentCount(`после раунда`);
+      if (marbleCount.player <= 0) console.warn(`Вы проиграли`);
+      if (marbleCount.player <= 0) console.warn(`Вы выйграли`);
+
+    }
 
 
-    return 0;
+
+    // currentCount();
+
+    // const x = inputBitPlayer(marbleCount.player);
+    // console.log(x);
+    roundResult();
+
+    return gameMarble();
   };
 
   window.marble = gameMarble;
