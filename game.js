@@ -1,4 +1,4 @@
-`use strict`;
+'use strict';
 
 (() => {
   const FIGURES_ENG = ['rock', 'scissors', 'paper'];
@@ -34,9 +34,9 @@
     return Math.floor(Math.random() * (max - min) + min);
   }
 
-  const getFifure = lang => {
+  // const getFifure = lang => {
 
-  };
+  // };
 
   const game = (language) => {
 
@@ -72,6 +72,18 @@
         return -1;
       }
 
+      const computerWin = () => {
+        result.computer += 1;
+        console.log(`текущий счет `, result.computer, result.player);
+        return message.computerWin;
+      }
+
+      const playerWin = () => {
+        result.player += 1;
+        console.log(`текущий счет `, result.computer, result.player);
+        return message.youWin;
+      }
+
       const whoWin = (computerBit, playerBit) => {
         switch (true) {
           case computerBit === playerBit: return message.draw;
@@ -89,18 +101,6 @@
         // if ((computerBit === 1) && (playerBit === 2)) return computerWin();//ножницы и бумага  1 
         // if ((computerBit === 2) && (playerBit === 0)) return computerWin();//бумага и камень 1 
         // if ((computerBit === 2) && (playerBit === 1)) return playerWin();//бумага и ножницы -1
-      }
-
-      const computerWin = () => {
-        result.computer += 1;
-        console.log(`текущий счет `, result.computer, result.player);
-        return message.computerWin;
-      }
-
-      const playerWin = () => {
-        result.player += 1;
-        console.log(`текущий счет `, result.computer, result.player);
-        return message.youWin;
       }
 
       console.warn(`lets PLAY`);
