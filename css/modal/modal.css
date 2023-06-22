@@ -93,12 +93,18 @@
   margin-bottom: 21px;
 }
 
+.modal__id {
+  font-size: 12px;
+}
+
 .modal__line {
   width: 100%;
   height: 1px;
   background-color: #C6C2DE;
   margin-bottom: 21px;
 }
+
+
 
 .set {
   width: 580px;

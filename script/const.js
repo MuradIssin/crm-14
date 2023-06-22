@@ -8,8 +8,15 @@ const modalTextDiscount = document.querySelector
 const modalTotalAmount = document.querySelector
   ('.set__total-amount');
 
+const modalClose = document.querySelector
+  ('.modal__close-button');
+
+const modalId = document.querySelector
+  ('.modal__id');
+
 
 console.log(modalTitle, modalCheckDiscount);
 console.log(modalCheckDiscount.checked);
 console.log(modalTextDiscount.innerHTML);
 console.log(modalTotalAmount.innerHTML);
+console.log(modalId.innerHTML)
