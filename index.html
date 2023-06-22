@@ -12,8 +12,9 @@
   <link rel="preload" href="fonts/Inter-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/Inter-SemiBold.woff" as="font" type="font/woff" crossorigin>
 
-  <script src="game.js" defer></script>
-  <script src="game-marble.js" defer></script>
+  <!-- <script src="game.js" defer></script> -->
+  <!-- <script src="game-marble.js" defer></script> -->
+  <script defer src="script/const.js"></script>
 
 </head>
 
@@ -304,8 +305,9 @@
   </section>
 
   <!-- visually-hidden -->
-  <section class="modal" aria-modal="true">
+  <section class="modal modal--flex" aria-modal="true">
     <div class="modal__window overlay">
+
       <button type="submit" class="modal__close-button">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M2 2L22 22" stroke="#6E6893" stroke-width="3" stroke-linecap="round" />
@@ -314,7 +316,6 @@
       </button>
 
       <div class="modal__add-good">
-
         <form action="https://jsonplaceholder.typicode.com/posts" method="POST" target="_blank" class="modal__form">
 
           <h3 class="modal__title">Добавить ТОВАР</h3>
@@ -380,7 +381,7 @@
               </div> -->
           </fieldset>
 
-          <div class="set__bottom-wrapper">
+          <div class="set__total-wrapper">
             <div class="set__total">
               <span class="set__total-text">Итоговая стоимость:</span>
               <span class="set__total-amount">$900.00</span>

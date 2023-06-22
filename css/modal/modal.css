@@ -34,6 +34,10 @@
   /* background-color: black; */
 }
 
+.modal--flex {
+  display: flex;
+}
+
 /* .modal:target {
   display: flex;
   pointer-events: auto;
@@ -334,7 +338,7 @@
   resize: none;
 }
 
-.set__bottom-wrapper {
+.set__total-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
