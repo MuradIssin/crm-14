@@ -168,15 +168,18 @@ const renderGoods = (goods) => {
 
   console.log("Длина массива ввода - ", goods.length)
 
-  for (let i = 0; i < goods.length; i++) {
-    rows.appendChild(createRow(arrayExample[i]));
-  }
+  // for (let i = 0; i < goods.length; i++) {
+  //   rows.appendChild(createRow(arrayExample[i]));
+  // }
 
-  const newRows = goods.map(function (item) {
-    console.log(item)
-    // createRow(arrayExample.item)
+  const newRows = goods.map((item)({
     // rows.appendChild(createRow(arrayExample.item));
-  })
+    createRow(arrayExample.item)
+    return item
+
+}))
+
+  newRows()
 
 }
 
