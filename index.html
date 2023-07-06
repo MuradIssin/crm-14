@@ -6,7 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>modal_4-3_lesson</title>
+
   <link rel="stylesheet" href="css/style.css">
+
   <link rel="preload" href="fonts/Inter-Bold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/Inter-Bold.woff" as="font" type="font/woff" crossorigin>
   <link rel="preload" href="fonts/Inter-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
@@ -19,8 +21,6 @@
 </head>
 
 <body>
-  <!-- <section class="modal" aria-modal="true"> -->
-
 
   <section class="cms">
     <div class="container">
@@ -74,10 +74,10 @@
             </tr>
           </thead>
 
-          <tbody>
+          <tbody class="table__data">
 
-            <tr>
-              <td>246016548</td>
+            <tr class="table__data-row">
+              <td class="table__data-id">246016548</td>
               <td>Навигационная система Soundmax</td>
               <td>Техника для дома</td>
               <td class="cell__center">шт</td>
@@ -93,8 +93,8 @@
               </td>
             </tr>
 
-            <tr>
-              <td>937295527</td>
+            <tr class="table__data-row">
+              <td class="table__data-id">937295527</td>
               <td>Настольная игра “На 4-х ногах”</td>
               <td>Настольные игры</td>
               <td class="cell__center">шт</td>
@@ -110,6 +110,40 @@
               </td>
             </tr>
 
+            <tr class="table__data-row">
+              <td>246016548</td>
+              <td>Навигационная система Soundmax</td>
+              <td>Техника для дома</td>
+              <td class="cell__center">шт</td>
+              <td class="cell__center">5</td>
+              <td class="cell__right">$100</td>
+              <td class="cell__right">$500</td>
+              <td>
+                <div class="cell_button">
+                  <button class="cell__image"></button>
+                  <button class="cell__editable"></button>
+                  <button class="cell__delete"></button>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>246016548</td>
+              <td>Навигационная система Soundmax</td>
+              <td>Техника для дома</td>
+              <td class="cell__center">шт</td>
+              <td class="cell__center">5</td>
+              <td class="cell__right">$100</td>
+              <td class="cell__right">$500</td>
+              <td>
+                <div class="cell_button">
+                  <button class="cell__image"></button>
+                  <button class="cell__editable"></button>
+                  <button class="cell__delete"></button>
+                </div>
+              </td>
+            </tr>
+
             <tr>
               <td>246016548</td>
               <td>Навигационная система Soundmax</td>
@@ -160,38 +194,7 @@
                 </div>
               </td>
             </tr>
-            <tr>
-              <td>246016548</td>
-              <td>Навигационная система Soundmax</td>
-              <td>Техника для дома</td>
-              <td class="cell__center">шт</td>
-              <td class="cell__center">5</td>
-              <td class="cell__right">$100</td>
-              <td class="cell__right">$500</td>
-              <td>
-                <div class="cell_button">
-                  <button class="cell__image"></button>
-                  <button class="cell__editable"></button>
-                  <button class="cell__delete"></button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>246016548</td>
-              <td>Навигационная система Soundmax</td>
-              <td>Техника для дома</td>
-              <td class="cell__center">шт</td>
-              <td class="cell__center">5</td>
-              <td class="cell__right">$100</td>
-              <td class="cell__right">$500</td>
-              <td>
-                <div class="cell_button">
-                  <button class="cell__image"></button>
-                  <button class="cell__editable"></button>
-                  <button class="cell__delete"></button>
-                </div>
-              </td>
-            </tr>
+
             <tr>
               <td>246016548</td>
               <td>Навигационная система Soundmax</td>
@@ -305,7 +308,7 @@
   </section>
 
   <!-- visually-hidden -->
-  <section class="modal modal--flex" aria-modal="true">
+  <section class="modal modal--flex " aria-modal="true">
     <div class="modal__window overlay">
 
       <button type="submit" class="modal__close-button">

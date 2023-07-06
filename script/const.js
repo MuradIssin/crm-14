@@ -82,44 +82,105 @@ const arrayExample = [
 
 
 
-// "id": 253842678,
-// "title": "Смартфон Xiaomi 11T 8/128GB",
-// "category": "mobile-phone",
-// "units": "шт",
-// "count": 3,
-// "price": 27000,
-
-// "description": "Смартфон Xiaomi 11T – это представитель флагманской линейки, выпущенной во второй половине 2021 года. И он полностью соответствует такому позиционированию, предоставляя своим обладателям возможность пользоваться отличными камерами, ни в чем себя не ограничивать при запуске игр и других требовательных приложений.",
-// "discont": false,
-// "images": {
-//   "small": "img/smrtxiaomi11t-m.jpg",
-//   "big": "img/smrtxiaomi11t-b.jpg"
-
-
 const createRow = (arrayObject) => {
-  // Создайте функцию createRow, которая будет получать объект и на основе объекта формировать элемент <tr> с <td> внутри
-
-  console.log("новая функция");
-  // console.log(arrayObject.id);
-  // console.log(arrayObject.title);
+  console.log(arrayObject);
+  // console.log("старая функция -createRow");
 
   const row = document.createElement("tr");
-
   const tdId = document.createElement("td");
   const tdTitle = document.createElement("td");
+  const tdCategory = document.createElement("td");
+  const tdUnits = document.createElement('td');
+  const tdCount = document.createElement("td");
+  const tdPrice = document.createElement("td");
+  const tdTotal = document.createElement("td");
+
+  // добавление класса
+  tdUnits.classList.add('cell__center');
+  tdCount.classList.add('cell__center');
+  tdPrice.classList.add('cell__right');
+  tdTotal.classList.add('cell__right');
 
   const textId = document.createTextNode(arrayObject.id);
   const textTitle = document.createTextNode(arrayObject.title);
+  const textCategory = document.createTextNode(arrayObject.category);
+  const textUnits = document.createTextNode(arrayObject.units);
+  const textCount = document.createTextNode(arrayObject.count);
+  const textPrice = document.createTextNode(`$${arrayObject.price}`);
+  const textTotal = document.createTextNode(`$${arrayObject.price * arrayObject.count}`);
 
-  tdId.appendChild(textId);
-  tdTitle.appendChild(textTitle);
+  tdId.append(textId);
+  tdTitle.append(textTitle);
+  tdCategory.append(textCategory);
+  tdUnits.append(textUnits);
+  tdCount.append(textCount);
+  tdPrice.append(textPrice);
+  tdTotal.append(textTotal);
 
   row.appendChild(tdId);
   row.appendChild(tdTitle);
+  row.appendChild(tdCategory);
+  row.appendChild(tdUnits);
+  row.appendChild(tdCount);
+  row.appendChild(tdPrice);
+  row.appendChild(tdTotal);
 
+  const tdWrapper = document.createElement("td");
+  const div = document.createElement("div");
+  const buttonImage = document.createElement("button");
+  const buttonEditable = document.createElement("button");
+  const buttonDelete = document.createElement("button");
+  const divCellButton = document.createElement("div");
+  divCellButton.classList.add('cell_button');
+
+  divCellButton.appendChild(buttonImage);
+  divCellButton.appendChild(buttonEditable);
+  divCellButton.appendChild(buttonDelete);
+  buttonImage.classList.add('cell__no-image');
+  buttonEditable.classList.add('cell__editable');
+  buttonDelete.classList.add('cell__delete');
+
+  tdWrapper.appendChild(divCellButton)
+  const textButton = document.createTextNode(tdWrapper);
+
+  row.appendChild(tdWrapper);
 
   return row
 }
 
+// 2. Создайте функцию renderGoods, принимает один параметр массив с объектами
+// Функция renderGoods перебирает массив и вставляет строки, созданные на основе createRow, в таблицу (советую использовать метод map)
+
+
+const delLastRows = () => {
+  if (rows.lastElementChild !== null) rows.removeChild(rows.lastElementChild)
+}
+
+const clearAllRows = () => {
+  while (rows.lastElementChild !== null) delLastRows()
+}
+
+
+const renderGoods = (goods) => {
+
+  console.log("renderGoods - start");
+  clearAllRows();
+
+  console.log("Длина массива ввода - ", goods.length)
+
+  for (let i = 0; i < goods.length; i++) {
+    rows.appendChild(createRow(arrayExample[i]));
+  }
+
+  const newRows = goods.map(function (item) {
+    console.log(item)
+    // createRow(arrayExample.item)
+    // rows.appendChild(createRow(arrayExample.item));
+  })
+
+}
+
+
+const rows = document.querySelector('.table__data');
 console.log(arrayExample);
-console.log(createRow(arrayExample[0]));
+renderGoods(arrayExample);
