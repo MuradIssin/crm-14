@@ -9,8 +9,8 @@ const modalTotalAmount = document.querySelector
   ('.set__total-amount');
 const modalClose = document.querySelector
   ('.modal__close-button');
-const modalId = document.querySelector
-  ('.modal__id');
+// const modalId = document.querySelector
+//   ('.modal__id');
 
 
 // console.log(modalTitle, modalCheckDiscount);
@@ -172,10 +172,10 @@ const renderGoods = (goods) => {
     rows.appendChild(createRow(arrayExample[i]));
   }
 
-  //   const newRows = goods.map((item)({
-  //     // rows.appendChild(createRow(arrayExample.item));
-  //     createRow(arrayExample.item);
-  //   return item
+  // const newRows = goods.map((item)({
+  //   // rows.appendChild(createRow(arrayExample.item));
+  //   rows.appendChild(createRow(item))
+  //   // return item;
   // }))
 
   // newRows()
